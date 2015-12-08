@@ -10,11 +10,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.GenericEntity;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import com.u14n.sandbox.model.DAOException;
-import com.u14n.sandbox.model.Address;
-import com.u14n.sandbox.model.AddressDAO;
+import com.u14n.sandbox.model.geography.Address;
+import com.u14n.sandbox.model.geography.AddressDAO;
 
 /**
  * Root resource (exposed at "addresses" path)
@@ -33,7 +32,8 @@ public class AddressesResource {
 					"NC",
 					"27601",
 					"Raleigh",
-					"100 E Davie Street",
+					"E Davie Street",
+					"100",
 					"Ste 108");
 			this.addressDAO.insert(redHatHeadquartersSuite);
 		} catch (DAOException e) {
@@ -45,7 +45,7 @@ public class AddressesResource {
 	@Produces(MediaType.TEXT_XML)
 	public List<Address> getAll() throws DAOException {
 		List<Address> list = this.addressDAO.findAll();
-		/* trace */ System.out.println("AddressesResource.getAll() list.size()=" + list.size());
+																				System.out.println("AddressesResource.getAll() list.size()=" + list.size());
 		return list;
 	}
 
@@ -54,7 +54,7 @@ public class AddressesResource {
 	public static class JSON extends AddressesResource {
 		@GET
 		public List<Address> getAllJSON() throws DAOException {
-			/* trace */ System.out.println("AddressesResource$JSON.getAllJSON()");
+																				System.out.println("AddressesResource$JSON.getAllJSON()");
 			return getAll();
 		}
 	}
@@ -63,7 +63,7 @@ public class AddressesResource {
 		@GET
 		@Produces(MediaType.APPLICATION_XML)
 		public List<Address> getAllXML() throws DAOException {
-			/* trace */ System.out.println("AddressesResource$XML.getAllXML()");
+																				System.out.println("AddressesResource$XML.getAllXML()");
 			return getAll();
 		}
 	}
